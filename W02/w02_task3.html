@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <title>W02: Task 3</title>
+    </head>
+    <body>
+    <script src="vec3.js"></script>
+    <script src="area_of_triangle.js"></script>
+        <p>
+            x0: 
+            <input type="number" id="x0" />
+            y0: 
+            <input type="number" id="y0" />
+            z0: 
+            <input type="number" id="z0" />
+
+            (x0,y0,z0) = (<span id="show_x0"></span>,<span id="show_y0"></span>,<span id="show_z0"></span>)
+        </p>
+
+        <p>
+            x1: 
+            <input type="number" id="x1" />
+            y1: 
+            <input type="number" id="y1" />
+            z1: 
+            <input type="number" id="z1" />
+
+            (x1,y1,z1) = (<span id="show_x1"></span>,<span id="show_y1"></span>,<span id="show_z1"></span>)
+        </p>
+
+        <p>
+            x2: 
+            <input type="number" id="x2" />
+            y2: 
+            <input type="number" id="y2" />
+            z2: 
+            <input type="number" id="z2" />
+
+            (x2,y2,z2) = (<span id="show_x2"></span>,<span id="show_y2"></span>,<span id="show_z2"></span>)
+        </p>
+        <p>
+            <input type="button" value="press" onclick="click_gain()" />
+        </p>
+        <p>
+            S = <span id ="show_S"></span>
+        </p>
+        <script>
+            function click_gain()
+            {
+                var x0 = document.getElementById("x0");
+                var y0 = document.getElementById("y0");
+                var z0 = document.getElementById("z0");
+
+                var x1 = document.getElementById("x1");
+                var y1 = document.getElementById("y1");
+                var z1 = document.getElementById("z1");
+
+                var x2 = document.getElementById("x2");
+                var y2 = document.getElementById("y2");
+                var z2 = document.getElementById("z2");
+
+
+                document.getElementById("show_x0").textContent = x0.value;
+                document.getElementById("show_y0").textContent = y0.value;
+                document.getElementById("show_z0").textContent = z0.value;
+
+                document.getElementById("show_x1").textContent = x1.value;
+                document.getElementById("show_y1").textContent = y1.value;
+                document.getElementById("show_z1").textContent = z1.value;
+
+                document.getElementById("show_x2").textContent = x2.value;
+                document.getElementById("show_y2").textContent = y2.value;
+                document.getElementById("show_z2").textContent = z2.value;
+
+                var v0 = new Vec3(parseFloat(x0.value),parseFloat(y0.value),parseFloat(z0.value));
+                var v1 = new Vec3(parseFloat(x1.value),parseFloat(y1.value),parseFloat(z1.value));
+                var v2 = new Vec3(parseFloat(x2.value),parseFloat(y2.value),parseFloat(z2.value));
+                var S = AreaOfTriangle(v0,v1,v2);
+                document.getElementById("show_S").textContent = String(S);
+
+            }
+        </script>
+    </body>
+</html>
