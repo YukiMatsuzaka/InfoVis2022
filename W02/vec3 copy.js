@@ -39,7 +39,7 @@ class Vec3
     {
         //return Math.max( this.x, this.y, this.z );
         const m = this.x > this.y ? this.x : this.y;
-        return m > this.z ? m : this.z;}
+        return m > this.z ? this.z : m;}
 
     mid()
     {
@@ -58,5 +58,39 @@ class Vec3
     length()
     {
         return Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z)
+    }
+    min()
+    {
+        var min_v = this.x;
+
+        if (min_v >= this.y){min_v = this.y}
+        if (min_v >= this.z){min_v = this.z}
+
+        return min_v;
+    }
+
+    mid()
+    {
+        if (this.x >= this.y)
+        {
+            if (this.y >= this.z){return this.y}
+            else if (this.x >= this.z){return this.z}
+            else{return this.x}
+        }
+        else
+        {
+            if (this.x >= this.z){return this.x}
+            else if (this.y >= this.z){return this.z}
+            else{return this.y}
+        }
+    }
+    max()
+    {
+        var max_v = this.x;
+
+        if (max_v <= this.y){max_v = this.y}
+        if (max_v <= this.z){max_v = this.z}
+
+        return max_v;
     }
 }
