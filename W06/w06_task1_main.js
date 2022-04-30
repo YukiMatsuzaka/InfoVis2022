@@ -4,9 +4,9 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W04/w04_task1.csv")
 
         var config = {
             parent: '#drawing_region',
-            width: 256,
-            height: 256,
-            margin: {top:10, right:10, bottom:20, left:30}
+            width: 350,
+            height: 350,
+            margin: {top:50, right:20, bottom:50, left:70}
         };
 
         const scatter_plot = new ScatterPlot( config, data );
@@ -49,13 +49,17 @@ class ScatterPlot {
             .range( [0, self.inner_height] );
 
         self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(10);
+            .ticks(10)
+            .tickSize(5)
+            .tickPadding([5]);
 
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`);
         
         self.yaxis = d3.axisLeft( self.yscale )
-            .ticks(10);
+            .ticks(10)
+            .tickSize(5)
+            .tickPadding([5]);
         
         self.yaxis_group = self.chart.append('g')
             .attr('transform', `translate(0,0)`);

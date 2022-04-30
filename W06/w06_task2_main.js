@@ -4,9 +4,9 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W04/w04_task1.csv")
 
         var config = {
             parent: '#drawing_region',
-            width: 300,
-            height: 300,
-            margin: {top:50, right:20, bottom:50, left:60}
+            width: 350,
+            height: 350,
+            margin: {top:50, right:20, bottom:50, left:70}
         };
 
         const scatter_plot = new ScatterPlot( config, data );
@@ -49,13 +49,17 @@ class ScatterPlot {
             .range( [0,self.inner_height] );
 
         self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(10);
+            .ticks(10)
+            .tickSize(5)
+            .tickPadding([5]);
 
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`)
         
         self.yaxis = d3.axisLeft( self.yscale )
-            .ticks(10);
+            .ticks(10)
+            .tickSize(5)
+            .tickPadding([5]);
         
         self.yaxis_group = self.chart.append('g')
             .attr('transform', `translate(0,0)`);
@@ -96,45 +100,47 @@ class ScatterPlot {
 
         self.svg.append("text")
             .attr("x",0)
-            .attr("y",140)
+            .attr("y",160)
             .attr("font-weight","bold")
-            .attr('transform', `rotate(-90,20,140)`)
-            .text("Y-label")
+            .attr("font-size",25)
+            .attr('transform', `rotate(-90,20,160)`)
+            .text("y")
         
         self.svg.append("text")
-            .attr("x",150)
-            .attr("y",290)
+            .attr("x",195)
+            .attr("y",350)
             .attr("font-weight","bold")
-            .text("X-label")
+            .attr("font-size",25)
+            .text("x")
 
         self.svg.append("text")
-            .attr("x",120)
+            .attr("x",140)
             .attr("y",30)
             .attr("font-weight","bold")
             .attr("font-size",25)
-            .text("Chart Title")
+            .text("W06 Task2")
         
         self.svg.append("text")
-            .attr("x",15)
-            .attr("y",255)
+            .attr("x",25)
+            .attr("y",305)
             .attr("font-size",12)
             .text("ymin")
 
         self.svg.append("text")
-            .attr("x",5)
-            .attr("y",52)
+            .attr("x",15)
+            .attr("y",53)
             .attr("font-size",12)
             .text("ymax")
         
         self.svg.append("text")
-            .attr("x",45)
-            .attr("y",280)
+            .attr("x",55)
+            .attr("y",330)
             .attr("font-size",12)
             .text("xmin")
         
         self.svg.append("text")
-            .attr("x",270)
-            .attr("y",280)
+            .attr("x",320)
+            .attr("y",330)
             .attr("font-size",12)
             .text("xmax")
         
