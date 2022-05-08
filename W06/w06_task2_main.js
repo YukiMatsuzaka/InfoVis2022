@@ -50,7 +50,7 @@ class ScatterPlot {
 
         self.xaxis = d3.axisBottom( self.xscale )
             .ticks(10)
-            .tickSize(5)
+            .tickSize(15)
             .tickPadding([5]);
 
         self.xaxis_group = self.chart.append('g')
@@ -58,7 +58,7 @@ class ScatterPlot {
         
         self.yaxis = d3.axisLeft( self.yscale )
             .ticks(10)
-            .tickSize(5)
+            .tickSize(15)
             .tickPadding([5]);
         
         self.yaxis_group = self.chart.append('g')
@@ -121,26 +121,26 @@ class ScatterPlot {
             .text("W06 Task2")
         
         self.svg.append("text")
-            .attr("x",25)
+            .attr("x",10)
             .attr("y",305)
             .attr("font-size",12)
             .text("ymin")
 
         self.svg.append("text")
-            .attr("x",15)
+            .attr("x",5)
             .attr("y",53)
             .attr("font-size",12)
             .text("ymax")
         
         self.svg.append("text")
             .attr("x",55)
-            .attr("y",330)
+            .attr("y",340)
             .attr("font-size",12)
             .text("xmin")
         
         self.svg.append("text")
             .attr("x",320)
-            .attr("y",330)
+            .attr("y",340)
             .attr("font-size",12)
             .text("xmax")
         
