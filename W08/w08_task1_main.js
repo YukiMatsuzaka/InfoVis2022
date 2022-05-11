@@ -1,10 +1,10 @@
-d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W04/w04_task2.csv")
+d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W08/w04_task2_fix.csv")
     .then( data => {
         data.forEach( d => { d.label = d.label; d.width = +d.width; d.color = d.color});
 
         var config = {
             parent: '#drawing_region',
-            width: 256,
+            width: 320,
             height: 128,
             margin: {top:10, right:30, bottom:20, left:60}
         };
