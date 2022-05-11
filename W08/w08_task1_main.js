@@ -1,22 +1,22 @@
-d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W04/data.csv")
+d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W04/w04_task2.csv")
     .then( data => {
-        data.forEach( d => { d.x = +d.x; d.y = +d.y; });
+        data.forEach( d => { d.label = d.label; d.width = +d.width; d.color = d.color});
 
         var config = {
             parent: '#drawing_region',
             width: 256,
-            height: 256,
-            margin: {top:10, right:10, bottom:20, left:10}
+            height: 128,
+            margin: {top:10, right:30, bottom:20, left:60}
         };
 
-        const scatter_plot = new ScatterPlot( config, data );
-        scatter_plot.update();
+        const barchart = new BarChart( config, data );
+        barchart.update();
     })
     .catch( error => {
         console.log( error );
     });
 
-class ScatterPlot {
+class BarChart {
 
     constructor( config, data ) {
         this.config = {
@@ -25,7 +25,7 @@ class ScatterPlot {
             height: config.height || 256,
             margin: config.margin || {top:10, right:10, bottom:10, left:10}
         }
-        this.data = data;
+        this.data = data
         this.init();
     }
 
@@ -43,28 +43,32 @@ class ScatterPlot {
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
 
         self.xscale = d3.scaleLinear()
+            .domain([0, d3.max(self.data, d => d.width )])
             .range( [0, self.inner_width] );
 
-        self.yscale = d3.scaleLinear()
-            .range( [0, self.inner_height] );
+        self.yscale = d3.scaleBand()
+            .domain(self.data.map(d => d.label))
+            .range( [0, self.inner_height] )
+            .paddingInner(0.1);
 
         self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(20);
-
+            .ticks(10)
+            .tickSizeOuter(0);
+        
+        
+        self.yaxis = d3.axisLeft( self.yscale)
+            .tickSizeOuter(0);
+        
         self.xaxis_group = self.chart.append('g')
             .attr('transform', `translate(0, ${self.inner_height})`);
+        
+        
+        self.yaxis_group = self.chart.append('g');
+        
     }
 
     update() {
         let self = this;
-
-        const xmin = d3.min( self.data, d => d.x );
-        const xmax = d3.max( self.data, d => d.x );
-        self.xscale.domain( [xmin, xmax] );
-
-        const ymin = d3.min( self.data, d => d.y );
-        const ymax = d3.max( self.data, d => d.y );
-        self.yscale.domain( [ymin, ymax] );
 
         self.render();
     }
@@ -72,16 +76,23 @@ class ScatterPlot {
     render() {
         let self = this;
 
-        self.chart.selectAll("circle")
-            .data(self.data)
-            .enter()
-            .append("circle")
-            .attr("cx", d => self.xscale( d.x ) )
-            .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", d => d.r );
 
         self.xaxis_group
-            .call( self.xaxis );
+            .call(self.xaxis);
         
+        self.yaxis_group
+            .call(self.yaxis);
+
+        self.chart.selectAll("rect")
+            .data(self.data)
+            .enter()
+            .append("rect")
+            .attr("x", 0)
+            .attr("y", d => self.yscale(d.label))
+            .attr("width", d => self.xscale(d.width))
+            .attr("height", self.yscale.bandwidth())
+            .style("fill", function(d){ return d.color; });
+        
+
     }
 }
