@@ -42,12 +42,12 @@ class PieChart {
             .value( d => d.width);
 
         self.arc = d3.arc()
-            .innerRadius(0)
+            .innerRadius(self.radius/5)
             .outerRadius(self.radius);
 
         self.text_arc = d3.arc()
-            .innerRadius(self.radius - 30)
-            .outerRadius(self.radius - 30);
+            .innerRadius(self.radius - 40)
+            .outerRadius(self.radius - 40);
 
     }
 
@@ -68,16 +68,14 @@ class PieChart {
 
         self.g.append("path")
             .attr("d", self.arc)
-            .attr("fill", "black")
-            .attr("opacity", 0.75)
+            .attr("fill", d => d.data.color)
             .attr("stroke", "white");
 
 
         self.g.append("text")
             .attr("fill", "black")
             .attr("transform", function(d) {return "translate(" + self.text_arc.centroid(d) + ")"; })
-            .attr("dy", "5px")
-            .attr("font", "10px")
+            //.attr ('transform', `translate(${self.text_arc.centroid(d.width)})`)
             .attr("text-anchor", "middle")
             .text(function(d) {return d.data.label; })
 

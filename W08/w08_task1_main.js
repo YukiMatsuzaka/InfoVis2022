@@ -43,11 +43,9 @@ class BarChart {
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
 
         self.xscale = d3.scaleLinear()
-            .domain([0, d3.max(self.data, d => d.width )])
             .range( [0, self.inner_width] );
 
         self.yscale = d3.scaleBand()
-            .domain(self.data.map(d => d.label))
             .range( [0, self.inner_height] )
             .paddingInner(0.1);
 
@@ -69,6 +67,11 @@ class BarChart {
 
     update() {
         let self = this;
+        const xmax = d3.max( self.data, d => d.width );
+        self.xscale.domain( [0,xmax] );
+
+        const ymap = self.data.map(d => d.label)
+        self.yscale.domain(ymap) 
 
         self.render();
     }
