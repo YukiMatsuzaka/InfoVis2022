@@ -106,8 +106,8 @@ class ScatterPlot {
             .append("circle")
             .attr("cx", d => self.xscale( d.x ) )
             .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", d => d.r );
-            //.style("fill", function(d){ return d.color; });
+            .attr("r", d => d.r )
+            .style("fill", function(d){ return d.color; });
 
         self.xaxis_group
             .call( self.xaxis );
