@@ -89,8 +89,8 @@ class ScatterPlot {
             .append("circle")
             .attr("cx", d => self.xscale( d.x ) )
             .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", d => d.r )
-            .style("fill", function(d){ return d.color; });
+            .attr("r", d => d.r );
+            //.style("fill", function(d){ return d.color; });
 
         self.xaxis_group
             .call( self.xaxis );
@@ -118,7 +118,7 @@ class ScatterPlot {
             .attr("y",30)
             .attr("font-weight","bold")
             .attr("font-size",25)
-            .text("W06 Task2")
+            .text("W10 Task2")
         
         self.svg.append("text")
             .attr("x",10)
