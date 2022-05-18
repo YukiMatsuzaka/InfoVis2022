@@ -116,6 +116,7 @@ class BarChart {
             .attr("y", d => self.yscale(d.label))
             .attr("width", d => self.xscale(d.width))
             .attr("height", self.yscale.bandwidth())
+            .style("fill", function(d){ return d.color; });
         
 
     }
