@@ -1,6 +1,6 @@
 d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W10/w10_task2.csv")
     .then( data => {
-        data.forEach( d => { d.x = +d.x; d.y = +d.y; });
+        data.forEach( d => { d.x = +d.x; d.y = +d.y; d.r = +d.r; d.color=d.color; });
 
         var config = {
             parent: '#drawing_region',
@@ -16,7 +16,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W10/w10_task2.csv")
             .on('mouseover', (e,d) => {
                 d3.select('#tooltip')
                     .style('opacity', 1)
-                    .html(`<div class="tooltip-label">Position</div>(${d.x}, ${d.y})`);
+                    .html(`<div class="tooltip-label">(Position){r_size}[color]</div>(${d.x}, ${d.y}){${d.r}}[${d.color}]`);
             })
             .on('mousemove', (e) => {
                 const padding = 10;
