@@ -49,10 +49,10 @@ class BarChart {
 
     update() {
         let self = this;
-        const xmax = d3.max( self.data, d => d.width );
+        const xmax = d3.max( self.data, d => d.month_1 );
         self.xscale.domain( [0,xmax] );
 
-        const ymap = self.data.map(d => d.label)
+        const ymap = self.data.map(d => d.Industry)
         self.yscale.domain(ymap) 
 
         self.render();
@@ -75,10 +75,9 @@ class BarChart {
             .transition().duration(1000)
             //.append("rect")
             .attr("x", 0)
-            .attr("y", d => self.yscale(d.label))
-            .attr("width", d => self.xscale(d.width))
-            .attr("height", self.yscale.bandwidth())
-            .style("fill", function(d){ return d.color; });
+            .attr("y", d => self.yscale(d.Industry))
+            .attr("width", d => self.xscale(d.month_1))
+            .attr("height", self.yscale.bandwidth());
         
 
     }
