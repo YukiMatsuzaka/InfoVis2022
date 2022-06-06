@@ -10,6 +10,7 @@ d3.csv("https://vizlab-kobe-lecture.github.io/InfoVis2021/W12/iris.csv")
             d.sepal_length = +d.sepal_length;
             d.sepal_width = +d.sepal_width;
         });
+        d3.csv("")
 
         const color_scale = d3.scaleOrdinal( d3.schemeCategory10 );
         color_scale.domain(['setosa','versicolor','virginica']);
