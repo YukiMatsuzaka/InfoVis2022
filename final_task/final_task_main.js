@@ -1,6 +1,6 @@
 d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected.csv")
     .then( data => {
-        data.forEach( d => { d.month = d.Month;d.infected=d.infected_month});
+        data.forEach( d => { d.month = d.Month;d.infected=+d.infected_month});
 
         var config = {
             parent: '#drawing_region',
@@ -62,8 +62,7 @@ class LineChart {
         self.yaxis_group = self.chart.append('g')
 
         self.line = d3.line()
-            .x( d => self.xscale(d.x))
-            .y( d => self.yscale(d.y));
+            .y( d => self.yscale(d.infected));
 
     }
 
