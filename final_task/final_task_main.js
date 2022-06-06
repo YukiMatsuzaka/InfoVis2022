@@ -1,6 +1,6 @@
-d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/W08/w08_task2.csv")
+d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected.csv")
     .then( data => {
-        data.forEach( d => { d.x = +d.x; d.y = +d.y; d.color=d.color});
+        data.forEach( d => { d.month = d.Month;d.infected=d.infected_month});
 
         var config = {
             parent: '#drawing_region',
@@ -103,8 +103,7 @@ class LineChart {
             .append("circle")
             .attr("cx", d => self.xscale( d.x ) )
             .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", 5)
-            .style("fill", function(d){ return d.color; });
+            .attr("r", 5);
 
     }
 }
