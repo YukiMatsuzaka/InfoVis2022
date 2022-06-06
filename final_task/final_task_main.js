@@ -1,12 +1,12 @@
 d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected.csv")
     .then( data => {
-        data.forEach( d => { d.month = d.Month;d.infected=+d.infected_month});
+        data.forEach( d => { d.month = d.Month;d.infected=+d.infected_month;d.x=+d.x});
 
         var config = {
             parent: '#drawing_region',
-            width: 256,
-            height: 128,
-            margin: {top:10, right:20, bottom:20, left:30}
+            width: 512,
+            height: 256,
+            margin: {top:30, right:20, bottom:20, left:60}
         };
 
         const linechart = new LineChart( config, data );
@@ -62,6 +62,7 @@ class LineChart {
         self.yaxis_group = self.chart.append('g')
 
         self.line = d3.line()
+            .x( d => self.xscale(d.x))
             .y( d => self.yscale(d.infected));
 
     }
@@ -73,8 +74,8 @@ class LineChart {
         const xmax = d3.max( self.data, d => d.x );
         self.xscale.domain( [xmin, xmax] );
 
-        const ymin = d3.min( self.data, d => d.y );
-        const ymax = d3.max( self.data, d => d.y );
+        const ymin = d3.min( self.data, d => d.infected );
+        const ymax = d3.max( self.data, d => d.infected );
         self.yscale.domain( [ymin,ymax] );       
 
         self.render();
@@ -95,14 +96,14 @@ class LineChart {
             .attr('stroke', 'black')
             .attr('fill', 'none')
 
-        
+        /*
         self.chart.selectAll("circle")
             .data(self.data)
             .enter()
             .append("circle")
             .attr("cx", d => self.xscale( d.x ) )
             .attr("cy", d => self.yscale( d.y ) )
-            .attr("r", 5);
+            .attr("r", 5);*/
 
     }
 }
