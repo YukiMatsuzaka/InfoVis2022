@@ -76,7 +76,7 @@ class LineChart {
 
         const ymin = d3.min( self.data, d => d.infected );
         const ymax = d3.max( self.data, d => d.infected );
-        self.yscale.domain( [ymax-300000,ymin] );       
+        self.yscale.domain( [ymax,ymin] );       
 
         self.render();
     }
