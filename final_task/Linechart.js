@@ -79,13 +79,16 @@ class LineChart {
             .attr('fill', 'none')
 
         
-        self.chart.selectAll("circle")
+        self.cercles = self.chart.selectAll("circle")
             .data(self.data)
             .enter()
             .append("circle")
             .attr("cx", d => self.xscale( d.month ) )
             .attr("cy", d => self.yscale( d.infected ) )
-            .attr("r", 5);
+            .attr("r", 5)
+            .on('click', function(ev,d) {
+                SelectMonth()
+            })
         
         self.svg.append("text")
             .attr("x",80)
