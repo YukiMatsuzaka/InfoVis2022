@@ -2,6 +2,15 @@
     <head>
         <title>Final Task</title>
     <style>
+	body {
+	     font-family: system-ui;
+	 }
+	 .container {
+	     display: flex;
+	 }
+	 .bar.active {
+	     stroke: #000;
+	 }
     #tooltip {
 	     position: absolute;
 	     opacity: 0;
@@ -20,7 +29,7 @@
     </head>
     <body>
     <div id="tooltip"></div>
-	<svg id="drawing_region"></svg>
+	<svg id="drawing_region"></svg></div>
 	<script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="Linechart.js"></script>
     <script src="BarChart.js"></script>

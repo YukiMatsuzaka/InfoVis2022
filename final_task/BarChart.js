@@ -13,7 +13,6 @@ class BarChart {
 
     init() {
         let self = this;
-        self.tag = [['Machinery_Equipment'],['Food_Beverages'],['Textiles']];
 
         self.svg = d3.select( self.config.parent )
             .attr('width', self.config.width)
@@ -52,8 +51,10 @@ class BarChart {
         let self = this;
         const xmax = d3.max( self.data, d => d.Machinery_Equipment );
         self.xscale.domain( [0,xmax] );
+
         const ymap = self.data.map(d => d.month)
         self.yscale.domain(ymap) 
+
         self.render();
     }
 
@@ -67,16 +68,24 @@ class BarChart {
         self.yaxis_group
             .call(self.yaxis);
 
-        self.chart.selectAll("rect")
+        self.rect = self.chart.selectAll(".bar")
             .data(self.data)
             .join("rect")
-            //.enter()
+            .on('click', function(ev,d){
+                d3.selectAll(".bar").attr("fill",d => d.color)
+                d3.select(this)
+                    .attr("fill", "red");
+                    //.classed('active',true);
+                select_month = d.month;
+                SelectMonth();
+            })
+            .attr("class", "bar")
             .transition().duration(1000)
-            //.append("rect")
             .attr("x", 0)
             .attr("y", d => self.yscale(d.month))
             .attr("width", d => self.xscale(d.Machinery_Equipment))
-            .attr("height", self.yscale.bandwidth());
+            .attr("height", self.yscale.bandwidth())
+            .attr("fill", d => d.color)
         
 
     }
