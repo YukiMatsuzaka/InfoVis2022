@@ -13,6 +13,7 @@ class BarChart {
 
     init() {
         let self = this;
+        self.tag = [['Machinery_Equipment'],['Food_Beverages'],['Textiles']];
 
         self.svg = d3.select( self.config.parent )
             .attr('width', self.config.width)
@@ -49,12 +50,10 @@ class BarChart {
 
     update() {
         let self = this;
-        const xmax = d3.max( self.data, d => d.month_1 );
+        const xmax = d3.max( self.data, d => d.Machinery_Equipment );
         self.xscale.domain( [0,xmax] );
-
-        const ymap = self.data.map(d => d.Industry)
+        const ymap = self.data.map(d => d.month)
         self.yscale.domain(ymap) 
-
         self.render();
     }
 
@@ -75,8 +74,8 @@ class BarChart {
             .transition().duration(1000)
             //.append("rect")
             .attr("x", 0)
-            .attr("y", d => self.yscale(d.Industry))
-            .attr("width", d => self.xscale(d.month_1))
+            .attr("y", d => self.yscale(d.month))
+            .attr("width", d => self.xscale(d.Machinery_Equipment))
             .attr("height", self.yscale.bandwidth());
         
 
