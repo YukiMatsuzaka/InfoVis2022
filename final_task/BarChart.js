@@ -44,13 +44,47 @@ class BarChart {
         
         
         self.yaxis_group = self.chart.append('g');
+
+        self.svg.append("text")
+            .attr("x",120)
+            .attr("y",20)
+            .attr("font-weight","bold")
+            .attr("font-size",20)
+            .text("Commercial sales value (2020)");
+
+        self.svg.append("text")
+            .attr("x",180)
+            .attr("y",250)
+            .attr("font-size",16)
+            .text("sales (billion yen)");
+        
+        self.svg.append("text")
+            .attr("x",0)
+            .attr("y",160)
+            .attr("font-size",16)
+            .attr('transform', `rotate(-90,20,160)`)
+            .text("month (in 2020)");
         
     }
 
     update() {
         let self = this;
-        const xmax = d3.max( self.data, d => d.Machinery_Equipment );
-        self.xscale.domain( [0,xmax] );
+        if (key == 'Machinery_Equipment') {
+            const xmax = d3.max( self.data, d => d.Machinery_Equipment );
+            self.xscale.domain( [0,xmax+600] );
+        }
+        else if (key == 'Food_Beverages'){
+            const xmax = d3.max( self.data, d => d.Food_Beverages );
+            self.xscale.domain( [0,xmax+600] );
+        }
+        else if ( key == 'Textiles') {
+            const xmax = d3.max( self.data, d => d.Textiles );
+            self.xscale.domain( [0,xmax] );
+        }
+        else if (key == 'Furniture') {
+            const xmax = d3.max( self.data, d => d.Furniture );
+            self.xscale.domain( [0,xmax] );
+        }
 
         const ymap = self.data.map(d => d.month)
         self.yscale.domain(ymap) 
@@ -60,8 +94,6 @@ class BarChart {
 
     render() {
         let self = this;
-
-
         self.xaxis_group
             .call(self.xaxis);
         
@@ -72,20 +104,40 @@ class BarChart {
             .data(self.data)
             .join("rect")
             .on('click', function(ev,d){
-                d3.selectAll(".bar").attr("fill",d => d.color)
                 d3.select(this)
                     .attr("fill", "red");
-                    //.classed('active',true);
                 select_month = d.month;
                 SelectMonth();
             })
             .attr("class", "bar")
+            .attr("fill", d => d.color)
             .transition().duration(1000)
             .attr("x", 0)
             .attr("y", d => self.yscale(d.month))
-            .attr("width", d => self.xscale(d.Machinery_Equipment))
-            .attr("height", self.yscale.bandwidth())
-            .attr("fill", d => d.color)
+        if (key == 'Machinery_Equipment') {
+            this.rect
+                .attr("width", d => self.xscale(d.Machinery_Equipment))
+                .attr("height", self.yscale.bandwidth())
+        }
+        else if (key == 'Food_Beverages'){
+            this.rect
+                .attr("width", d => self.xscale(d.Food_Beverages))
+                .attr("height", self.yscale.bandwidth())
+                .attr("fill", d => d.color)
+        }
+        else if ( key == 'Textiles') {
+            this.rect
+                .attr("width", d => self.xscale(d.Textiles))
+                .attr("height", self.yscale.bandwidth())
+                .attr("fill", d => d.color)
+        }
+        else if (key == 'Furniture') {
+            this.rect
+                .attr("width", d => self.xscale(d.Furniture))
+                .attr("height", self.yscale.bandwidth())
+                .attr("fill", d => d.color)
+        }
+
         
 
     }
