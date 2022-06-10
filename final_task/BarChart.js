@@ -24,19 +24,21 @@ class BarChart {
         self.inner_width = self.config.width - self.config.margin.left - self.config.margin.right;
         self.inner_height = self.config.height - self.config.margin.top - self.config.margin.bottom;
 
-        self.xscale = d3.scaleLinear()
-            .range( [0, self.inner_width] );
+        self.xscale = d3.scaleBand()
+            .range( [0, self.inner_width] )
+            .paddingInner(0.2)
+            //.paddingOuter(0.1);
 
-        self.yscale = d3.scaleBand()
-            .range( [0, self.inner_height] )
-            .paddingInner(0.1);
+        self.yscale = d3.scaleLinear()
+            .range( [ self.inner_height,0] )
+            //.paddingInner(0.1);
 
         self.xaxis = d3.axisBottom( self.xscale )
-            .ticks(10)
             .tickSizeOuter(0);
         
         
         self.yaxis = d3.axisLeft( self.yscale)
+            .ticks(10)
             .tickSizeOuter(0);
         
         self.xaxis_group = self.chart.append('g')
@@ -50,55 +52,74 @@ class BarChart {
             .attr("y",20)
             .attr("font-weight","bold")
             .attr("font-size",20)
-            .text("Commercial sales value (2020)");
+            .text("Commercial sales value in 2020");
 
         self.svg.append("text")
-            .attr("x",180)
+            .attr("x",220)
             .attr("y",250)
             .attr("font-size",16)
-            .text("sales (billion yen)");
+            .text("month (in 2020)")
         
         self.svg.append("text")
             .attr("x",0)
             .attr("y",160)
             .attr("font-size",16)
             .attr('transform', `rotate(-90,20,160)`)
-            .text("month (in 2020)");
+            .text("sales (billion yen)");
         
     }
 
     update() {
         let self = this;
-        if (key == 'Machinery_Equipment') {
-            const xmax = d3.max( self.data, d => d.Machinery_Equipment );
-            self.xscale.domain( [0,xmax+600] );
+        if (key == 'Textiles') {
+            const ymax = d3.max( self.data, d => d.Textiles );
+            self.yscale.domain( [0,ymax] );
         }
-        else if (key == 'Food_Beverages'){
-            const xmax = d3.max( self.data, d => d.Food_Beverages );
-            self.xscale.domain( [0,xmax+600] );
+        else if (key == 'Apparel_Accessories'){
+            const ymax = d3.max( self.data, d => d.Apparel_Accessories );
+            self.yscale.domain( [0,ymax] );
         }
-        else if ( key == 'Textiles') {
-            const xmax = d3.max( self.data, d => d.Textiles );
-            self.xscale.domain( [0,xmax] );
+        else if ( key == 'Livestock_Aquatic_Products') {
+            const ymax = d3.max( self.data, d => d.Textiles );
+            self.yscale.domain( [0,ymax] );
         }
-        else if (key == 'Furniture') {
-            const xmax = d3.max( self.data, d => d.Furniture );
-            self.xscale.domain( [0,xmax] );
+        else if (key == 'Food_Beverages') {
+            const ymax = d3.max( self.data, d => d.Food_Beverages );
+            self.yscale.domain( [0,ymax] );
+        }
+        else if (key == 'Building_Materials') {
+            const ymax = d3.max( self.data, d => d.Building_Materials );
+            self.yscale.domain( [0,ymax] );
+        }
+        else if (key == 'Chemicals') {
+            const ymax = d3.max( self.data, d => d.Chemicals );
+            self.yscale.domain( [0,ymax] );
+        }
+        else if (key == 'Minerals_Metals') {
+            const ymax = d3.max( self.data, d => d.Minerals_Metals );
+            self.yscale.domain( [0,ymax] );
+        }
+        else if (key == 'Industry_Machinery_Epuipment') {
+            const ymax = d3.max( self.data, d => d.Industry_Machinery_Epuipment );
+            self.yscale.domain( [0,ymax] );
+        }
+        else if (key == 'Motor_Vehicles') {
+            const ymax = d3.max( self.data, d => d.Motor_Vehicles );
+            self.yscale.domain( [0,ymax] );
+        }
+        else if (key == 'Electorical_Machinery_Epuipment') {
+            const ymax = d3.max( self.data, d => d.Electorical_Machinery_Epuipment );
+            self.yscale.domain( [0,ymax] );
         }
 
-        const ymap = self.data.map(d => d.month)
-        self.yscale.domain(ymap) 
+        const xmap = self.data.map(d => d.month)
+        self.xscale.domain(xmap) 
 
         self.render();
     }
 
     render() {
         let self = this;
-        self.xaxis_group
-            .call(self.xaxis);
-        
-        self.yaxis_group
-            .call(self.yaxis);
 
         self.rect = self.chart.selectAll(".bar")
             .data(self.data)
@@ -112,31 +133,74 @@ class BarChart {
             .attr("class", "bar")
             .attr("fill", d => d.color)
             .transition().duration(1000)
-            .attr("x", 0)
-            .attr("y", d => self.yscale(d.month))
-        if (key == 'Machinery_Equipment') {
+            .attr("x", d => self.xscale(d.month))
+        
+        if (key == 'Textiles') {
             this.rect
-                .attr("width", d => self.xscale(d.Machinery_Equipment))
-                .attr("height", self.yscale.bandwidth())
+                .attr("y", d => self.yscale(d.Textiles))
+                .attr("height", d => self.inner_height - self.yscale(d.Textiles))
+                .attr("width", self.xscale.bandwidth());
         }
-        else if (key == 'Food_Beverages'){
+        else if (key == 'Apparel_Accessories'){
             this.rect
-                .attr("width", d => self.xscale(d.Food_Beverages))
-                .attr("height", self.yscale.bandwidth())
-                .attr("fill", d => d.color)
+                .attr("y", d => self.yscale(d.Apparel_Accessories))
+                .attr("height", d => self.inner_height - self.yscale(d.Apparel_Accessories))
+                .attr("width", self.xscale.bandwidth())
         }
-        else if ( key == 'Textiles') {
+        else if ( key == 'Livestock_Aquatic_Products') {
             this.rect
-                .attr("width", d => self.xscale(d.Textiles))
-                .attr("height", self.yscale.bandwidth())
-                .attr("fill", d => d.color)
+                .attr("y", d => self.yscale(d.Livestock_Aquatic_Products))
+                .attr("height", d => self.inner_height - self.yscale(d.Livestock_Aquatic_Products))
+                .attr("width", self.xscale.bandwidth())
         }
-        else if (key == 'Furniture') {
+        else if (key == 'Food_Beverages') {
             this.rect
-                .attr("width", d => self.xscale(d.Furniture))
-                .attr("height", self.yscale.bandwidth())
-                .attr("fill", d => d.color)
+                .attr("y", d => self.yscale(d.Food_Beverages))
+                .attr("height", d => self.inner_height - self.yscale(d.Food_Beverages))
+                .attr("width", self.xscale.bandwidth())
         }
+        else if (key == 'Building_Materials') {
+            this.rect
+                .attr("y", d => self.yscale(d.Building_Materials))
+                .attr("height", d => self.inner_height - self.yscale(d.Building_Materials))
+                .attr("width", self.xscale.bandwidth())
+        }
+        else if (key == 'Chemicals') {
+            this.rect
+                .attr("y", d => self.yscale(d.Chemicals))
+                .attr("height", d => self.inner_height - self.yscale(d.Chemicals))
+                .attr("width", self.xscale.bandwidth())
+        }
+        else if (key == 'Minerals_Metals') {
+            this.rect
+                .attr("y", d => self.yscale(d.Minerals_Metals))
+                .attr("height", d => self.inner_height - self.yscale(d.Minerals_Metals))
+                .attr("width", self.xscale.bandwidth())
+        }
+        else if (key == 'Industry_Machinery_Epuipment') {
+            this.rect
+                .attr("y", d => self.yscale(d.Industry_Machinery_Epuipment))
+                .attr("height", d => self.inner_height - self.yscale(d.Industry_Machinery_Epuipment))
+                .attr("width", self.xscale.bandwidth())
+        }
+        else if (key == 'Motor_Vehicles') {
+            this.rect
+                .attr("y", d => self.yscale(d.Motor_Vehicles))
+                .attr("height", d => self.inner_height - self.yscale(d.Motor_Vehicles))
+                .attr("width", self.xscale.bandwidth())
+        }
+        else if (key == 'Electorical_Machinery_Epuipment') {
+            this.rect
+                .attr("y", d => self.yscale(d.Electorical_Machinery_Epuipment))
+                .attr("height", d => self.inner_height - self.yscale(d.Electorical_Machinery_Epuipment))
+                .attr("width", self.xscale.bandwidth())
+        }
+
+        self.xaxis_group
+            .call(self.xaxis);
+    
+        self.yaxis_group
+            .call(self.yaxis);
 
         
 

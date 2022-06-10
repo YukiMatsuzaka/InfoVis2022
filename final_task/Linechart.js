@@ -55,7 +55,7 @@ class LineChart {
             .text("2020 number of infected person COVID-19");
 
         self.svg.append("text")
-            .attr("x",190)
+            .attr("x",230)
             .attr("y",253)
             .attr("font-size",16)
             .text("month (in 2020)");
