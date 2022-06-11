@@ -8,7 +8,7 @@ let key = 'Textiles';
 d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected_Commercial.csv")
     .then( data => {
         input_data = data;
-        input_data.forEach( d => { d.month = +d.Month_2020;d.infected=+d.infected_month;d.Textiles=+d.Textiles;d.Apparel_Accessories=+d.Apparel_Accessories;d.Livestock_Aquatic_Products=d.Livestock_Aquatic_Products;d.Food_Beverages=+d.Food_Beverages;d.Building_Materials=+d.Building_Materials;d.Chemicals=+d.Chemicals;d.Minerals_Metals=+d.Minerals_Metals;d.Industry_Machinery_Epuipment=+d.Industry_Machinery_Epuipment;d.Motor_Vehicles=+d.Motor_Vehicles;d.Electorical_Machinery_Epuipment=+d.Electorical_Machinery_Epuipment;d.color=d.color;});
+        input_data.forEach( d => { d.month = +d.Month_2020;d.infected=+d.infected_month;d.Textiles=+d.Textiles;d.Apparel_Accessories=+d.Apparel_Accessories;d.Livestock_Aquatic_Products=d.Livestock_Aquatic_Products;d.Food_Beverages=+d.Food_Beverages;d.Building_Materials=+d.Building_Materials;d.Chemicals=+d.Chemicals;d.Minerals_Metals=+d.Minerals_Metals;d.Industry_Machinery_Equipment=+d.Industry_Machinery_Equipment;d.Motor_Vehicles=+d.Motor_Vehicles;d.Electorical_Machinery_Equipment=+d.Electorical_Machinery_Equipment;d.color=d.color;});
         var config = {
             parent: '#drawing_region_linechart',
             width: 512,
@@ -107,15 +107,15 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected_Commerci
                 minerals_metals.style.backgroundColor = 'orange';
             });
 
-        d3.select('#industry_machinery_epuipment')
+        d3.select('#industry_machinery_equipment')
             .on('click', d => {
-                key = 'Industry_Machinery_Epuipment';
+                key = 'Industry_Machinery_Equipment';
                 barchart.update(input_data);
                 document.getElementById("select_business").textContent = key;
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
-                industry_machinery_epuipment.style.backgroundColor = 'orange';
+                industry_machinery_equipment.style.backgroundColor = 'orange';
             });
 
         d3.select('#motor_vehicles')
@@ -129,15 +129,15 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected_Commerci
                 motor_vehicles.style.backgroundColor = 'orange';
             });
 
-        d3.select('#electorical_machinery_epuipment')
+        d3.select('#electorical_machinery_equipment')
             .on('click', d => {
-                key = 'Electorical_Machinery_Epuipment';
+                key = 'Electorical_Machinery_Equipment';
                 barchart.update(input_data);
                 document.getElementById("select_business").textContent = key;
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
-                electorical_machinery_epuipment.style.backgroundColor = 'orange';
+                electorical_machinery_equipment.style.backgroundColor = 'orange';
             });
 
     })
@@ -161,7 +161,7 @@ function ButtonColor_Off() {
     building_materials.style.backgroundColor = 'white';
     chemicals.style.backgroundColor = 'white';
     minerals_metals.style.backgroundColor = 'white';
-    industry_machinery_epuipment.style.backgroundColor = 'white';
+    industry_machinery_equipment.style.backgroundColor = 'white';
     motor_vehicles.style.backgroundColor = 'white';
-    electorical_machinery_epuipment.style.backgroundColor = 'white';
+    electorical_machinery_equipment.style.backgroundColor = 'white';
 }

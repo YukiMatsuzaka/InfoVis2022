@@ -80,7 +80,7 @@ class BarChart {
             self.yscale.domain( [0,ymax] );
         }
         else if ( key == 'Livestock_Aquatic_Products') {
-            const ymax = d3.max( self.data, d => d.Textiles );
+            const ymax = d3.max( self.data, d => d.Livestock_Aquatic_Products );
             self.yscale.domain( [0,ymax] );
         }
         else if (key == 'Food_Beverages') {
@@ -99,16 +99,16 @@ class BarChart {
             const ymax = d3.max( self.data, d => d.Minerals_Metals );
             self.yscale.domain( [0,ymax] );
         }
-        else if (key == 'Industry_Machinery_Epuipment') {
-            const ymax = d3.max( self.data, d => d.Industry_Machinery_Epuipment );
+        else if (key == 'Industry_Machinery_Equipment') {
+            const ymax = d3.max( self.data, d => d.Industry_Machinery_Equipment );
             self.yscale.domain( [0,ymax] );
         }
         else if (key == 'Motor_Vehicles') {
             const ymax = d3.max( self.data, d => d.Motor_Vehicles );
             self.yscale.domain( [0,ymax] );
         }
-        else if (key == 'Electorical_Machinery_Epuipment') {
-            const ymax = d3.max( self.data, d => d.Electorical_Machinery_Epuipment );
+        else if (key == 'Electorical_Machinery_Equipment') {
+            const ymax = d3.max( self.data, d => d.Electorical_Machinery_Equipment );
             self.yscale.domain( [0,ymax] );
         }
 
@@ -177,10 +177,10 @@ class BarChart {
                 .attr("height", d => self.inner_height - self.yscale(d.Minerals_Metals))
                 .attr("width", self.xscale.bandwidth())
         }
-        else if (key == 'Industry_Machinery_Epuipment') {
+        else if (key == 'Industry_Machinery_Equipment') {
             this.rect
-                .attr("y", d => self.yscale(d.Industry_Machinery_Epuipment))
-                .attr("height", d => self.inner_height - self.yscale(d.Industry_Machinery_Epuipment))
+                .attr("y", d => self.yscale(d.Industry_Machinery_Equipment))
+                .attr("height", d => self.inner_height - self.yscale(d.Industry_Machinery_Equipment))
                 .attr("width", self.xscale.bandwidth())
         }
         else if (key == 'Motor_Vehicles') {
@@ -189,10 +189,10 @@ class BarChart {
                 .attr("height", d => self.inner_height - self.yscale(d.Motor_Vehicles))
                 .attr("width", self.xscale.bandwidth())
         }
-        else if (key == 'Electorical_Machinery_Epuipment') {
+        else if (key == 'Electorical_Machinery_Equipment') {
             this.rect
-                .attr("y", d => self.yscale(d.Electorical_Machinery_Epuipment))
-                .attr("height", d => self.inner_height - self.yscale(d.Electorical_Machinery_Epuipment))
+                .attr("y", d => self.yscale(d.Electorical_Machinery_Equipment))
+                .attr("height", d => self.inner_height - self.yscale(d.Electorical_Machinery_Equipment))
                 .attr("width", self.xscale.bandwidth())
         }
 
