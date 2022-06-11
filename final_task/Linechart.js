@@ -117,7 +117,8 @@ class LineChart {
             //.enter()
             //.append("circle")
         circles
-            .attr("r", 5)
+            .transition().duration(500)
+            .attr("r", d => d.circle_size)
             .attr("cx", d => self.xscale( d.month ) )
             .attr("cy", d => self.yscale( d.infected ) )
             .attr("fill", d => d.color );
