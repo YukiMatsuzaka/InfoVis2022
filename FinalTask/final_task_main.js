@@ -5,7 +5,7 @@ let barchart;
 let linechart;
 let key = 'Textiles';
 
-d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected_Commercial.csv")
+d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercial.csv")
     .then( data => {
         input_data = data;
         input_data.forEach( d => { d.month = +d.Month;d.infected=+d.infected_month;d.Textiles=+d.Textiles;d.Apparel_Accessories=+d.Apparel_Accessories;d.Livestock_Aquatic_Products=d.Livestock_Aquatic_Products;d.Food_Beverages=+d.Food_Beverages;d.Building_Materials=+d.Building_Materials;d.Chemicals=+d.Chemicals;d.Minerals_Metals=+d.Minerals_Metals;d.Industry_Machinery_Equipment=+d.Industry_Machinery_Equipment;d.Motor_Vehicles=+d.Motor_Vehicles;d.Electorical_Machinery_Equipment=+d.Electorical_Machinery_Equipment;d.color=d.color;d.circle_size=+d.circle_size;d.Textiles_2019=+d.Textiles_2019;d.Apparel_Accessories_2019=+d.Apparel_Accessories_2019;d.Livestock_Aquatic_Products_2019=d.Livestock_Aquatic_Products_2019;d.Food_Beverages_2019=+d.Food_Beverages_2019;d.Building_Materials_2019=+d.Building_Materials_2019;d.Chemicals_2019=+d.Chemicals_2019;d.Minerals_Metals_2019=+d.Minerals_Metals_2019;d.Industry_Machinery_Equipment_2019=+d.Industry_Machinery_Equipment_2019;d.Motor_Vehicles_2019=+d.Motor_Vehicles_2019;d.Electorical_Machinery_Equipment_2019=+d.Electorical_Machinery_Equipment_2019;});
