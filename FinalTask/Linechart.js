@@ -52,7 +52,7 @@ class LineChart {
             .attr("y",20)
             .attr("font-weight","bold")
             .attr("font-size",20)
-            .text("2020 number of infected person COVID-19");
+            .text("2020 number of new cases of COVID-19");
 
         self.svg.append("text")
             .attr("x",230)
