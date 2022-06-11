@@ -138,8 +138,9 @@ class BarChart {
         if (key == 'Textiles') {
             this.rect
                 .attr("y", d => self.yscale(d.Textiles))
-                .attr("height", d => self.inner_height - self.yscale(d.Textiles))
-                .attr("width", self.xscale.bandwidth());
+                .attr("height", d => self.inner_height - self.yscale(d.Textiles_2019))
+                .attr("width", self.xscale.bandwidth())
+                //.attr("height", d => self.inner_height - self.yscale(d.Textiles_2019))
         }
         else if (key == 'Apparel_Accessories'){
             this.rect

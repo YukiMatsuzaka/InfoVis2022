@@ -8,7 +8,7 @@ let key = 'Textiles';
 d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/final_task/infected_Commercial.csv")
     .then( data => {
         input_data = data;
-        input_data.forEach( d => { d.month = +d.Month_2020;d.infected=+d.infected_month;d.Textiles=+d.Textiles;d.Apparel_Accessories=+d.Apparel_Accessories;d.Livestock_Aquatic_Products=d.Livestock_Aquatic_Products;d.Food_Beverages=+d.Food_Beverages;d.Building_Materials=+d.Building_Materials;d.Chemicals=+d.Chemicals;d.Minerals_Metals=+d.Minerals_Metals;d.Industry_Machinery_Equipment=+d.Industry_Machinery_Equipment;d.Motor_Vehicles=+d.Motor_Vehicles;d.Electorical_Machinery_Equipment=+d.Electorical_Machinery_Equipment;d.color=d.color;});
+        input_data.forEach( d => { d.month = +d.Month_2020;d.infected=+d.infected_month;d.Textiles=+d.Textiles;d.Apparel_Accessories=+d.Apparel_Accessories;d.Livestock_Aquatic_Products=d.Livestock_Aquatic_Products;d.Food_Beverages=+d.Food_Beverages;d.Building_Materials=+d.Building_Materials;d.Chemicals=+d.Chemicals;d.Minerals_Metals=+d.Minerals_Metals;d.Industry_Machinery_Equipment=+d.Industry_Machinery_Equipment;d.Motor_Vehicles=+d.Motor_Vehicles;d.Electorical_Machinery_Equipment=+d.Electorical_Machinery_Equipment;d.color=d.color;d.Textiles_2019=+d.Textiles_2019;});
         var config = {
             parent: '#drawing_region_linechart',
             width: 512,
