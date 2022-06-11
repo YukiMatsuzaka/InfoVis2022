@@ -65,7 +65,7 @@ class LineChart {
             .attr("y",170)
             .attr("font-size",16)
             .attr('transform', `rotate(-90,20,160)`)
-            .text("number of infected person");
+            .text("number of new cases");
 
         const xmin = d3.min( self.data, d => d.month );
         const xmax = d3.max( self.data, d => d.month );
