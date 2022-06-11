@@ -28,6 +28,9 @@ class BarChart {
             .range( [0, self.inner_width] )
             .paddingInner(0.2)
             //.paddingOuter(0.1);
+        self.xscale_2019 = d3.scaleBand()
+            .range( [0, self.inner_width] )
+            .paddingInner(0.5)
 
         self.yscale = d3.scaleLinear()
             .range( [ self.inner_height,0] )
@@ -72,15 +75,27 @@ class BarChart {
     update() {
         let self = this;
         if (key == 'Textiles') {
-            const ymax = d3.max( self.data, d => d.Textiles );
+            let ymax = d3.max( self.data, d => d.Textiles );
+            let ymax_2019 = d3.max(self.data, d => d.Textiles_2019);
+            if ( ymax < ymax_2019){
+                ymax = ymax_2019;
+            }
             self.yscale.domain( [0,ymax] );
         }
         else if (key == 'Apparel_Accessories'){
-            const ymax = d3.max( self.data, d => d.Apparel_Accessories );
+            let ymax = d3.max( self.data, d => d.Apparel_Accessories );
+            let ymax_2019 = d3.max( self.data, d => d.Apparel_Accessories_2019 );
+            if ( ymax < ymax_2019){
+                ymax = ymax_2019;
+            }
             self.yscale.domain( [0,ymax] );
         }
         else if ( key == 'Livestock_Aquatic_Products') {
-            const ymax = d3.max( self.data, d => d.Livestock_Aquatic_Products );
+            let ymax = d3.max( self.data, d => d.Livestock_Aquatic_Products );
+            let ymax_2019 = d3.max( self.data, d => d.Livestock_Aquatic_Products_2019 );
+            if ( ymax < ymax_2019){
+                ymax = ymax_2019;
+            }
             self.yscale.domain( [0,ymax] );
         }
         else if (key == 'Food_Beverages') {
@@ -134,25 +149,45 @@ class BarChart {
             .attr("fill", d => d.color)
             .transition().duration(1000)
             .attr("x", d => self.xscale(d.month))
+
+        
+        self.circles = self.chart.selectAll("circle")
+            .data(self.data)
+            .join('circle')
+            .transition().duration(1000)
+            .attr("r", 5)
+            .attr("cx", d => self.xscale( d.month )+14 )
         
         if (key == 'Textiles') {
             this.rect
                 .attr("y", d => self.yscale(d.Textiles))
-                .attr("height", d => self.inner_height - self.yscale(d.Textiles_2019))
+                .attr("height", d => self.inner_height - self.yscale(d.Textiles))
                 .attr("width", self.xscale.bandwidth())
-                //.attr("height", d => self.inner_height - self.yscale(d.Textiles_2019))
+                .attr("transform")
+            
+            this.circles
+                .attr("cy", d => self.yscale( d.Textiles_2019 ) )
+                .attr("fill", "blue" )
         }
         else if (key == 'Apparel_Accessories'){
             this.rect
                 .attr("y", d => self.yscale(d.Apparel_Accessories))
                 .attr("height", d => self.inner_height - self.yscale(d.Apparel_Accessories))
                 .attr("width", self.xscale.bandwidth())
+
+            this.circles
+                .attr("cy", d => self.yscale( d.Apparel_Accessories_2019 ) )
+                .attr("fill", "blue" )
         }
         else if ( key == 'Livestock_Aquatic_Products') {
             this.rect
                 .attr("y", d => self.yscale(d.Livestock_Aquatic_Products))
                 .attr("height", d => self.inner_height - self.yscale(d.Livestock_Aquatic_Products))
                 .attr("width", self.xscale.bandwidth())
+
+            this.circles
+                .attr("cy", d => self.yscale( d.Livestock_Aquatic_Products_2019 ) )
+                .attr("fill", "blue" )
         }
         else if (key == 'Food_Beverages') {
             this.rect
@@ -202,6 +237,7 @@ class BarChart {
     
         self.yaxis_group
             .call(self.yaxis);
+
 
         
 
