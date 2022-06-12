@@ -29,12 +29,13 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
         barchart.update();
 
         document.getElementById("select_business").textContent = key;
+        document.getElementById("select_business").style.color = "red";
 
         d3.select('#textiles')
         .on('click', d => {
             key = 'Textiles';
             barchart.update(input_data);
-            document.getElementById("select_business").textContent = key;
+            document.getElementById("select_business").textContent = 'Textiles';
             document.getElementById("select_business").style.color = "red";
 
             ButtonColor_Off();
@@ -45,7 +46,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
         .on('click', d => {
             key = 'Apparel_Accessories';
             barchart.update(input_data);
-            document.getElementById("select_business").textContent = key;
+            document.getElementById("select_business").textContent = 'Apparel & Accessories';
             document.getElementById("select_business").style.color = "red";
 
             ButtonColor_Off();
@@ -56,7 +57,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Livestock_Aquatic_Products';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Livestock & Aquatic Products';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
@@ -67,7 +68,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Food_Beverages';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Food & Beverages';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
@@ -78,7 +79,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Building_Materials';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Building Materials';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
@@ -89,7 +90,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Chemicals';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Chemicals';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
@@ -100,7 +101,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Minerals_Metals';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Minerals & Metals';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
@@ -111,7 +112,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Industry_Machinery_Equipment';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Industry Machinery & Equipment';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
@@ -122,7 +123,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Motor_Vehicles';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Motor Vehicles';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
@@ -133,7 +134,7 @@ d3.csv("https://yukimatsuzaka.github.io/InfoVis2022/FinalTask/infected_Commercia
             .on('click', d => {
                 key = 'Electorical_Machinery_Equipment';
                 barchart.update(input_data);
-                document.getElementById("select_business").textContent = key;
+                document.getElementById("select_business").textContent = 'Electorical Machinery & Equipment';
                 document.getElementById("select_business").style.color = "red";
 
                 ButtonColor_Off();
